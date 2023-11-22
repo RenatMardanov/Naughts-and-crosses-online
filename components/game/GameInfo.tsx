@@ -1,6 +1,5 @@
-import GameSymbol from "./GameSymbol";
-import { Symbols } from "./helpers/symbol";
-import styles from "./../styles/game.module.css";
+import { GameSymbol } from "./GameSymbol";
+import { Symbols } from "../helpers/symbol";
 
 interface GameInfoProps {
     isDraw: boolean;
@@ -8,19 +7,19 @@ interface GameInfoProps {
     currentStep: Symbols;
 }
 
-export default function GameInfo({ isDraw, winnerSymbol, currentStep }: GameInfoProps) {
+export function GameInfo({ isDraw, winnerSymbol, currentStep }: GameInfoProps) {
     if (winnerSymbol) {
         return (
-            <div className={styles["game-info"]}>
+            <div className="mb-2">
                 {`Победитель: `}
                 <GameSymbol symbol={winnerSymbol} />
             </div>
         );
     } else if (isDraw) {
-        return <div className={styles["game-info"]}>Ничья</div>;
+        return <div className={"mb-2"}>Ничья</div>;
     }
     return (
-        <div className={styles["game-info"]}>
+        <div className={"mb-2"}>
             {`Ход: `} <GameSymbol symbol={currentStep} />;
         </div>
     );
