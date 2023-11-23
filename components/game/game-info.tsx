@@ -32,7 +32,7 @@ export function GameInfo({ className }: GameInfoProps) {
         <div className="relative">
           <Profile className="w-44" />
           <div className="w-5 h-5 rounded-full bg-white absolute -top-1 -left-1 shadow flex justify-center items-center">
-            <ZeroIcon />
+            <ZeroIcon className="w-5 h-5" />
           </div>
         </div>
       </div>

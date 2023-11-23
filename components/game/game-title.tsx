@@ -3,6 +3,7 @@ import { ArrowLeftIcon } from "./icons/arrow-left-icon";
 import { StarIcon } from "./icons/star-icon";
 import { UserIcon } from "./icons/user-icon";
 import { TimerIcon } from "./icons/timer-icon";
+import { UiButton } from "../uikit/ui-button";
 
 export function GameTitle() {
   return (
