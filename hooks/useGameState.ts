@@ -1,73 +1,34 @@
 import { useState } from "react";
-import { Symbols } from "../components/helpers/symbol";
+import { STEP_ORDER, Symbols } from "../components/helpers/constants";
 
 export function useGameState() {
-  const [cells, setCells] = useState<(Symbols | null)[]>([
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ]);
-  const [currentStep, setCurrentStep] = useState(Symbols.X);
-  const [winnerSequence, setWinnerSequence] = useState<number[] | undefined>(
-    undefined,
-  );
+  const [gameState, setGameState] = useState(() => ({
+    cells: new Array(19 * 19).fill(null),
+    currentStep: Symbols.CROSS,
+  }));
 
-  const computeWinner = (cells: (Symbols | null)[]): number[] | undefined => {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
+  function getNextStep(currentStep: Symbols): Symbols {
+    const nextMoveIndex = STEP_ORDER.indexOf(currentStep) + 1;
+    return STEP_ORDER[nextMoveIndex] ?? STEP_ORDER[0];
+  }
 
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
-        return [a, b, c];
-      }
-    }
-  };
+  const nextStep = getNextStep(gameState.currentStep);
 
   const handleCellClick = (index: number) => {
-    if (cells[index] || winnerSequence) {
-      return;
+    if (gameState.cells[index] === null) {
+      setGameState((lastGameState) => ({
+        ...lastGameState,
+        currentStep: getNextStep(lastGameState.currentStep),
+        cells: lastGameState.cells.map((cell, i) =>
+          i === index ? lastGameState.currentStep : cell,
+        ),
+      }));
     }
-    const cellsCopy = cells.slice();
-    cellsCopy[index] = currentStep;
-    const winner = computeWinner(cellsCopy);
-
-    setCells(cellsCopy);
-    setCurrentStep(currentStep === Symbols.O ? Symbols.X : Symbols.O);
-    setWinnerSequence(winner);
   };
-
-  const resetHandler = () => {
-    setCells(Array(9).fill(null));
-    setWinnerSequence(undefined);
-    setCurrentStep(Symbols.X);
-  };
-
-  const winnerSymbol = winnerSequence ? cells[winnerSequence[0]] : undefined;
-
-  const isDraw = !winnerSequence && cells.includes(null) === false;
 
   return {
-    cells,
-    resetHandler,
+    gameState,
     handleCellClick,
-    currentStep,
-    winnerSequence,
-    winnerSymbol,
-    isDraw,
+    nextStep,
   };
 }

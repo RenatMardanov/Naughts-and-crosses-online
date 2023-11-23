@@ -19,7 +19,7 @@ export function GameInfo({ className }: GameInfoProps) {
         <div className="relative">
           <Profile className="w-44" />
           <div className="w-5 h-5 rounded-full bg-white absolute -top-1 -left-1 shadow flex justify-center items-center">
-            <CrossIcon />
+            <CrossIcon className="w-4 h-4" />
           </div>
         </div>
         <div className="h-6 w-px bg-slate-200"></div>
@@ -32,7 +32,7 @@ export function GameInfo({ className }: GameInfoProps) {
         <div className="relative">
           <Profile className="w-44" />
           <div className="w-5 h-5 rounded-full bg-white absolute -top-1 -left-1 shadow flex justify-center items-center">
-            <ZeroIcon className="w-5 h-5" />
+            <ZeroIcon className="w-4 h-4" />
           </div>
         </div>
       </div>

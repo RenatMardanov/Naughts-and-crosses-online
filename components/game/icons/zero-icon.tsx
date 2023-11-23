@@ -1,4 +1,4 @@
-import { IconsClassName } from "../../helpers/iconsClassName";
+import { IconsClassName } from "../../helpers/interfaces";
 
 export function ZeroIcon({ className }: IconsClassName) {
   return (

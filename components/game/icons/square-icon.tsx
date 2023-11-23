@@ -1,6 +1,9 @@
-export function SquareIcon() {
+import { IconsClassName } from "../../helpers/interfaces";
+
+export function SquareIcon({ className }: IconsClassName) {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="11"
       height="11"

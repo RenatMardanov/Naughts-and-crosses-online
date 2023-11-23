@@ -1,6 +1,9 @@
-export function TrangleIcon() {
+import { IconsClassName } from "../../helpers/interfaces";
+
+export function TrangleIcon({ className }: IconsClassName) {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="11"
       height="11"
