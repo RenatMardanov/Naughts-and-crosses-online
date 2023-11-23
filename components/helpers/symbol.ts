@@ -1,4 +1,4 @@
 export enum Symbols {
-    O = "O",
-    X = "X",
+  O = "O",
+  X = "X",
 }
