@@ -14,7 +14,7 @@ export function Profile({ className }: ProfileProps) {
         "flex items-center gap-2 text-start text-teal-600",
       )}
     >
-      <Image src={avatar} alt="avatar" unoptimized width={48} height={48} />
+      <Image src={avatar} alt="avatar" width={48} height={48} />
       <div>
         <div className=" text-lg leading-tight">Mardanov</div>
         <div className="text-slate-400 text-xs leading-tight">

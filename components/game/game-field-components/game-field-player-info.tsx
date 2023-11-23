@@ -1,7 +1,5 @@
-import { CrossIcon } from "../icons/cross-icon";
-import { ZeroIcon } from "../icons/zero-icon";
 import { UiButton } from "../../uikit/ui-button";
-import { GameSymbol } from "./game-symbol";
+import { GameSymbol } from "../game-symbol";
 import { Symbols } from "../../helpers/constants";
 
 interface GameFieldPlayerInfoProps {

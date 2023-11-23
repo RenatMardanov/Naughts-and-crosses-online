@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write .",
-    "deploy": "next build && gh-pages -d .next"
+    "deploy": "next build && gh-pages -d out"
   },
   "author": "Renat Mardanov",
   "license": "ISC",

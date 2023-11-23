@@ -2,7 +2,7 @@ import { GameFieldLayout } from "./game-field-components/game-field-layout";
 import { GameFieldPlayerInfo } from "./game-field-components/game-field-player-info";
 import { GameFieldCell } from "./game-field-components/game-field-cell";
 import { GameFieldGrid } from "./game-field-components/game-field-grid";
-import { GameSymbol } from "./game-field-components/game-symbol";
+import { GameSymbol } from "./game-symbol";
 import { useGameState } from "../../hooks/useGameState";
 
 interface GameFieldProps {
