@@ -9,6 +9,7 @@ import PlayerAvatar4 from "./images/avatar-men-2.png";
 interface GameInfoProps {
   className: string;
   playersCount: number;
+  currentStep: Symbols;
 }
 
 const players = [
@@ -42,7 +43,11 @@ const players = [
   },
 ];
 
-export function GameInfo({ className, playersCount }: GameInfoProps) {
+export function GameInfo({
+  className,
+  playersCount,
+  currentStep,
+}: GameInfoProps) {
   return (
     <div
       className={clsx(
@@ -56,6 +61,7 @@ export function GameInfo({ className, playersCount }: GameInfoProps) {
             key={player.id}
             playerInfo={player}
             isRight={index % 2 === 1}
+            isTimerRunning={player.symbol === currentStep}
           />
         );
       })}

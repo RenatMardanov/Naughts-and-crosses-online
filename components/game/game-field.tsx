@@ -1,19 +1,28 @@
-import { GameFieldLayout } from "./game-field-components/game-field-layout";
-import { GameFieldPlayerInfo } from "./game-field-components/game-field-player-info";
-import { GameFieldCell } from "./game-field-components/game-field-cell";
-import { GameFieldGrid } from "./game-field-components/game-field-grid";
 import { GameSymbol } from "./game-symbol";
-import { useGameState } from "../../hooks/useGameState";
+import { Symbols } from "../helpers/constants";
+import {
+  GameFieldCell,
+  GameFieldGrid,
+  GameFieldLayout,
+  GameFieldPlayerInfo,
+} from "./game-field-components";
 
 interface GameFieldProps {
   className: string;
-  playersCount: number;
+  gameState: {
+    cells: any[];
+    currentStep: Symbols;
+  };
+  handleCellClick: (index: number) => void;
+  nextStep: Symbols;
 }
 
-export function GameField({ className, playersCount }: GameFieldProps) {
-  const { gameState, handleCellClick, nextStep } = useGameState({
-    playersCount,
-  });
+export function GameField({
+  className,
+  gameState,
+  handleCellClick,
+  nextStep,
+}: GameFieldProps) {
   return (
     <GameFieldLayout className={className}>
       <GameFieldPlayerInfo

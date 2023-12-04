@@ -3,6 +3,7 @@ import { Symbols } from "../helpers/constants";
 import { Profile } from "../profile";
 import { GameSymbol } from "./game-symbol";
 import clsx from "clsx";
+import { useEffect, useState } from "react";
 
 interface PlayerInfoProps {
   playerInfo: {
@@ -13,9 +14,37 @@ interface PlayerInfoProps {
   };
 
   isRight: boolean;
+  isTimerRunning: boolean;
 }
 
-export function PlayerInfo({ playerInfo, isRight }: PlayerInfoProps) {
+export function PlayerInfo({
+  playerInfo,
+  isRight,
+  isTimerRunning,
+}: PlayerInfoProps) {
+  const [seconds, setSeconds] = useState(15);
+
+  const secondString = Math.floor(seconds / 60)
+    .toString()
+    .padStart(2, "0");
+  const minuteString = Math.floor(seconds % 60)
+    .toString()
+    .padStart(2, "0");
+
+  const isDanger = seconds <= 10;
+
+  useEffect(() => {
+    if (isTimerRunning) {
+      const timerInterval = setInterval(() => {
+        setSeconds((s) => Math.max(s - 1, 0));
+      }, 1000);
+      return () => {
+        clearInterval(timerInterval);
+        setSeconds(15);
+      };
+    }
+  }, [isTimerRunning]);
+
   return (
     <div className="flex items-center gap-3">
       <div className={clsx("relative", isRight && "order-3")}>
@@ -34,11 +63,13 @@ export function PlayerInfo({ playerInfo, isRight }: PlayerInfoProps) {
       ></div>
       <div
         className={clsx(
-          "text-slate-900 text-lg font-semibold",
+          "text-lg font-semibold w-14",
           isRight && "order-1",
+          isDanger && "text-orange-600",
+          isTimerRunning ? "text-slate-900" : "text-slate-500",
         )}
       >
-        01:08
+        {secondString}:{minuteString}
       </div>
     </div>
   );
