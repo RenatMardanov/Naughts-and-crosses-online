@@ -15,6 +15,7 @@ interface GameFieldProps {
   };
   handleCellClick: (index: number) => void;
   nextStep: Symbols;
+  winnerSequence: number[] | undefined;
 }
 
 export function GameField({
@@ -22,6 +23,7 @@ export function GameField({
   gameState,
   handleCellClick,
   nextStep,
+  winnerSequence,
 }: GameFieldProps) {
   return (
     <GameFieldLayout className={className}>
@@ -31,7 +33,11 @@ export function GameField({
       />
       <GameFieldGrid>
         {gameState.cells.map((symbol, index) => (
-          <GameFieldCell onClick={() => handleCellClick(index)} key={index}>
+          <GameFieldCell
+            onClick={() => handleCellClick(index)}
+            key={index}
+            isWinner={winnerSequence?.includes(index)}
+          >
             {symbol && <GameSymbol className="w-5 h-5" symbol={symbol} />}
           </GameFieldCell>
         ))}

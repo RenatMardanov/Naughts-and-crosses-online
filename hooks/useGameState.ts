@@ -1,22 +1,23 @@
 import { useState } from "react";
-import { STEP_ORDER, Symbols } from "../components/helpers/constants";
+import { Symbols } from "../components/helpers/constants";
+import { computeWinner, getNextStep } from "../components/game/model";
 
 interface useGameStateProps {
   playersCount: number;
 }
 
+interface gameStateProps {
+  cells: (Symbols | null)[];
+  currentStep: Symbols;
+}
+
 export function useGameState({ playersCount }: useGameStateProps) {
-  const [gameState, setGameState] = useState(() => ({
+  const [gameState, setGameState] = useState<gameStateProps>(() => ({
     cells: new Array(19 * 19).fill(null),
     currentStep: Symbols.CROSS,
   }));
 
-  function getNextStep(currentStep: Symbols, playersCount: number) {
-    const slicedStepOrder = STEP_ORDER.slice(0, playersCount);
-    const nextMoveIndex = slicedStepOrder.indexOf(currentStep) + 1;
-    return slicedStepOrder[nextMoveIndex] ?? slicedStepOrder[0];
-  }
-
+  const winnerSequence = computeWinner(gameState.cells);
   const nextStep = getNextStep(gameState.currentStep, playersCount);
 
   const handleCellClick = (index: number) => {
@@ -35,5 +36,6 @@ export function useGameState({ playersCount }: useGameStateProps) {
     gameState,
     handleCellClick,
     nextStep,
+    winnerSequence,
   };
 }

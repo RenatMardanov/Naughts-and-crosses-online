@@ -22,7 +22,7 @@ export function PlayerInfo({
   isRight,
   isTimerRunning,
 }: PlayerInfoProps) {
-  const [seconds, setSeconds] = useState(15);
+  const [seconds, setSeconds] = useState(60);
 
   const secondString = Math.floor(seconds / 60)
     .toString()
@@ -40,7 +40,7 @@ export function PlayerInfo({
       }, 1000);
       return () => {
         clearInterval(timerInterval);
-        setSeconds(15);
+        setSeconds(60);
       };
     }
   }, [isTimerRunning]);
@@ -66,7 +66,7 @@ export function PlayerInfo({
           "text-lg font-semibold w-14",
           isRight && "order-1",
           isDanger && "text-orange-600",
-          isTimerRunning ? "text-slate-900" : "text-slate-500",
+          isTimerRunning ? "text-slate-900" : "text-slate-400",
         )}
       >
         {secondString}:{minuteString}
