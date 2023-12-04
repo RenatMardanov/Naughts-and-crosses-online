@@ -7,10 +7,13 @@ import { useGameState } from "../../hooks/useGameState";
 
 interface GameFieldProps {
   className: string;
+  playersCount: number;
 }
 
-export function GameField({ className }: GameFieldProps) {
-  const { gameState, handleCellClick, nextStep } = useGameState();
+export function GameField({ className, playersCount }: GameFieldProps) {
+  const { gameState, handleCellClick, nextStep } = useGameState({
+    playersCount,
+  });
   return (
     <GameFieldLayout className={className}>
       <GameFieldPlayerInfo

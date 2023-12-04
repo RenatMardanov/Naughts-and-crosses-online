@@ -1,12 +1,20 @@
-import Image from "next/image";
-import avatar from "./avatar.png";
+import Image, { StaticImageData } from "next/image";
 import clsx from "clsx";
+import avatarSrc from "../game/images/avatar-men-1.png";
 
 interface ProfileProps {
   className: string;
+  name: string;
+  rating: number;
+  avatar?: StaticImageData;
 }
 
-export function Profile({ className }: ProfileProps) {
+export function Profile({
+  className,
+  name,
+  rating,
+  avatar = avatarSrc,
+}: ProfileProps) {
   return (
     <div
       className={clsx(
@@ -15,10 +23,10 @@ export function Profile({ className }: ProfileProps) {
       )}
     >
       <Image src={avatar} alt="avatar" width={48} height={48} />
-      <div>
-        <div className=" text-lg leading-tight">Mardanov</div>
+      <div className="overflow-hidden">
+        <div className=" text-lg leading-tight truncate ">{name}</div>
         <div className="text-slate-400 text-xs leading-tight">
-          Рейтинг: 1234
+          Рейтинг: {rating}
         </div>
       </div>
     </div>

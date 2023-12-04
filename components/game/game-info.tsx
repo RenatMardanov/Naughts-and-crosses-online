@@ -1,41 +1,64 @@
-import { Profile } from "../profile";
 import clsx from "clsx";
-import { CrossIcon } from "./icons/cross-icon";
-import { ZeroIcon } from "./icons/zero-icon";
+import { PlayerInfo } from "./player-info";
+import { Symbols } from "../helpers/constants";
+import PlayerAvatar1 from "./images/avatar-girl-1.png";
+import PlayerAvatar2 from "./images/avatar-girl-2.png";
+import PlayerAvatar3 from "./images/avatar-men-1.png";
+import PlayerAvatar4 from "./images/avatar-men-2.png";
 
 interface GameInfoProps {
   className: string;
+  playersCount: number;
 }
 
-export function GameInfo({ className }: GameInfoProps) {
+const players = [
+  {
+    id: 1,
+    name: "Renat",
+    rating: 1111,
+    avatar: PlayerAvatar1,
+    symbol: Symbols.CROSS,
+  },
+  {
+    id: 2,
+    name: "Sofiaaaaaaaaaaa",
+    rating: 850,
+    avatar: PlayerAvatar2,
+    symbol: Symbols.ZERO,
+  },
+  {
+    id: 3,
+    name: "Maxim",
+    rating: 1400,
+    avatar: PlayerAvatar3,
+    symbol: Symbols.TRIANGLE,
+  },
+  {
+    id: 4,
+    name: "Roma",
+    rating: 1130,
+    avatar: PlayerAvatar4,
+    symbol: Symbols.SQUARE,
+  },
+];
+
+export function GameInfo({ className, playersCount }: GameInfoProps) {
   return (
     <div
       className={clsx(
         className,
-        "bg-white rounded-2xl shadow-md px-8 py-4 flex justify-between",
+        "bg-white rounded-2xl shadow-md px-8 py-4 grid grid-cols-2 justify-between gap-3",
       )}
     >
-      <div className="flex items-center gap-3">
-        <div className="relative">
-          <Profile className="w-44" />
-          <div className="w-5 h-5 rounded-full bg-white absolute -top-1 -left-1 shadow flex justify-center items-center">
-            <CrossIcon className="w-4 h-4" />
-          </div>
-        </div>
-        <div className="h-6 w-px bg-slate-200"></div>
-        <div className="text-slate-900 text-lg font-semibold">01:08</div>
-      </div>
-
-      <div className="flex items-center gap-3">
-        <div className="text-orange-600 text-lg font-semibold">00:08</div>
-        <div className="h-6 w-px bg-slate-200"></div>
-        <div className="relative">
-          <Profile className="w-44" />
-          <div className="w-5 h-5 rounded-full bg-white absolute -top-1 -left-1 shadow flex justify-center items-center">
-            <ZeroIcon className="w-4 h-4" />
-          </div>
-        </div>
-      </div>
+      {players.slice(0, playersCount).map((player, index) => {
+        return (
+          <PlayerInfo
+            key={player.id}
+            playerInfo={player}
+            isRight={index % 2 === 1}
+          />
+        );
+      })}
     </div>
   );
 }
