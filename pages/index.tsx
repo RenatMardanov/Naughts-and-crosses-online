@@ -46,7 +46,9 @@ export default function HomePages() {
           width="md"
           className=""
           isOpen={!!winnerSymbol}
-          onClose={() => {}}
+          onClose={() => {
+            console.log("close");
+          }}
         >
           <UiModal.Header className="">Игра завершена</UiModal.Header>
           <UiModal.Body className="">

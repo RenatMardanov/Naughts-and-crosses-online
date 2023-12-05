@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { CloseModalCross } from "../../game/icons/close-modal-cross";
-import { ReactNode } from "react";
+import { MouseEvent, MouseEventHandler, ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 interface UiModalProps {
   width: "md" | "full";
@@ -22,18 +23,28 @@ export function UiModal({
   isOpen = false,
   onClose,
 }: UiModalProps) {
+  const handleClose = (event: React.MouseEvent<HTMLDivElement>) => {
+    const modalOverlay = (event.target as HTMLElement).closest(
+      "[data-id=modal]",
+    );
+    if (modalOverlay) return;
+    onClose();
+  };
+
   if (!isOpen) {
     return null;
   }
 
-  return (
+  const modals = (
     <div
+      onClick={handleClose}
       className={clsx(
         "fixed inset-0 bg-slate-900/60 backdrop-blur pt-10 pb-10 overflow-y-auto ",
         className,
       )}
     >
       <div
+        data-id="modal"
         className={clsx(
           "bg-white rounded-lg  mx-auto relative flex flex-col",
           {
@@ -42,13 +53,24 @@ export function UiModal({
           }[width],
         )}
       >
-        <button className="flex w-8 h-8 bg-white/10 items-center justify-center absolute left-[calc(100%+12px)] rounded hover:bg-white/40 transition-colors" onClick={() => onClose()}>
+        <button
+          className="flex w-8 h-8 bg-white/10 items-center justify-center absolute left-[calc(100%+12px)] rounded hover:bg-white/40 transition-colors"
+          onClick={onClose}
+        >
           <CloseModalCross className="w-4 h-4 text-white" />
         </button>
         {children}
       </div>
     </div>
   );
+
+  const modalsContainer = document.getElementById("modals");
+
+  if (modalsContainer) {
+    return createPortal(modals, modalsContainer);
+  } else {
+    return null;
+  }
 }
 
 UiModal.Header = function UiModelHeader({
