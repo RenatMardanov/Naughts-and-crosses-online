@@ -3,6 +3,8 @@ import { GameField, GameInfo, GameTitle } from "../components/game";
 import { Header } from "../components/header";
 import { useGameState } from "../hooks";
 import { GameSymbol } from "../components/game/game-symbol";
+import { UiModal } from "../components/uikit/ui-modal/ui-modal";
+import { UiButton } from "../components/uikit/ui-button";
 
 export default function HomePages() {
   const [playersCount, setPlayersCount] = useState(2);
@@ -39,6 +41,29 @@ export default function HomePages() {
             <GameSymbol symbol={winnerSymbol} className="" />
           </div>
         )}
+
+        <UiModal
+          width="md"
+          className=""
+          isOpen={!!winnerSymbol}
+          onClose={() => {}}
+        >
+          <UiModal.Header className="">Игра завершена</UiModal.Header>
+          <UiModal.Body className="">
+            <div className="text-sm">
+              Победитель: <span className="text-teal-600">Renatka</span>
+            </div>
+            <div className="text-3xl">Обновляй, нихера не готово</div>
+          </UiModal.Body>
+          <UiModal.Footer className="">
+            <UiButton className="" variant="outline" size="md">
+              Вернуться
+            </UiButton>
+            <UiButton className="" variant="primary" size="md">
+              Играть снова
+            </UiButton>
+          </UiModal.Footer>
+        </UiModal>
 
         <GameField
           gameState={gameState}
