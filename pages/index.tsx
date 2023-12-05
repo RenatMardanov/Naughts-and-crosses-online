@@ -31,11 +31,15 @@ export default function HomePages() {
             handlePlayerTimeOver(gameState.currentStep)
           }
         />
-        <div className="my-4 flex items-center justify-center">
-          {" "}
-          Победитель{"   "}
-          {winnerSymbol && <GameSymbol symbol={winnerSymbol} className="" />}
-        </div>
+
+        {winnerSymbol && (
+          <div className="my-4 flex items-center justify-center">
+            {" "}
+            Победитель{"   "}
+            <GameSymbol symbol={winnerSymbol} className="" />
+          </div>
+        )}
+
         <GameField
           gameState={gameState}
           handleCellClick={handleCellClick}
