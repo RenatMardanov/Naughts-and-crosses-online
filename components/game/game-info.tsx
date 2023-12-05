@@ -11,6 +11,7 @@ interface GameInfoProps {
   playersCount: number;
   currentStep: Symbols;
   isWinner: boolean;
+  handlePlayerTimeOver: (symbol: Symbols) => void;
 }
 
 const players = [
@@ -49,6 +50,7 @@ export function GameInfo({
   playersCount,
   currentStep,
   isWinner,
+  handlePlayerTimeOver,
 }: GameInfoProps) {
   return (
     <div
@@ -64,6 +66,7 @@ export function GameInfo({
             playerInfo={player}
             isRight={index % 2 === 1}
             isTimerRunning={player.symbol === currentStep && !isWinner}
+            onTimeOver={() => handlePlayerTimeOver(currentStep)}
           />
         );
       })}

@@ -15,14 +15,16 @@ interface PlayerInfoProps {
 
   isRight: boolean;
   isTimerRunning: boolean;
+  onTimeOver: () => void;
 }
 
 export function PlayerInfo({
   playerInfo,
   isRight,
   isTimerRunning,
+  onTimeOver,
 }: PlayerInfoProps) {
-  const [seconds, setSeconds] = useState(60);
+  const [seconds, setSeconds] = useState(15);
 
   const secondString = Math.floor(seconds / 60)
     .toString()
@@ -40,10 +42,17 @@ export function PlayerInfo({
       }, 1000);
       return () => {
         clearInterval(timerInterval);
-        setSeconds(60);
+        setSeconds(15);
       };
     }
   }, [isTimerRunning]);
+
+  useEffect(() => {
+    if (seconds === 0) {
+      onTimeOver();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seconds]);
 
   return (
     <div className="flex items-center gap-3">
@@ -65,8 +74,8 @@ export function PlayerInfo({
         className={clsx(
           "text-lg font-semibold w-14",
           isRight && "order-1",
-          isDanger && "text-orange-600",
           isTimerRunning ? "text-slate-900" : "text-slate-400",
+          isDanger && "text-orange-600",
         )}
       >
         {secondString}:{minuteString}
