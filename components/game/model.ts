@@ -34,8 +34,16 @@ export function computeWinner(
       result[0].push(j - gap + i);
       result[1].push(fieldSize * (j - gap) + (j - gap) + i);
       result[2].push(-fieldSize * (j - gap) + (j - gap) + i);
-      result[3].push(fieldSize * i + (j - gap));
+      result[3].push(fieldSize * (j - gap) + i);
     }
+
+    const x = i % fieldSize;
+    if (x < gap || x >= fieldSize - gap) {
+      result.shift();
+      result.shift();
+      result.shift();
+    }
+
     return result;
   }
 

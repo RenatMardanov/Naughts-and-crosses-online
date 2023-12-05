@@ -20,6 +20,7 @@ export default function HomePages() {
           playersCount={playersCount}
           className="mt-4"
           currentStep={gameState.currentStep}
+          isWinner={!!winnerSequence}
         />
         <GameField
           gameState={gameState}

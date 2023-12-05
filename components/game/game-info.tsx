@@ -10,6 +10,7 @@ interface GameInfoProps {
   className: string;
   playersCount: number;
   currentStep: Symbols;
+  isWinner: boolean;
 }
 
 const players = [
@@ -47,6 +48,7 @@ export function GameInfo({
   className,
   playersCount,
   currentStep,
+  isWinner,
 }: GameInfoProps) {
   return (
     <div
@@ -61,7 +63,7 @@ export function GameInfo({
             key={player.id}
             playerInfo={player}
             isRight={index % 2 === 1}
-            isTimerRunning={player.symbol === currentStep}
+            isTimerRunning={player.symbol === currentStep && !isWinner}
           />
         );
       })}
