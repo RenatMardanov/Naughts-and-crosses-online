@@ -34,6 +34,7 @@ export function GameField({
       <GameFieldGrid>
         {gameState.cells.map((symbol, index) => (
           <GameFieldCell
+            disabled={!!winnerSequence}
             onClick={() => handleCellClick(index)}
             key={index}
             isWinner={winnerSequence?.includes(index)}
