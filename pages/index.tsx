@@ -33,7 +33,7 @@ export default function HomePages() {
       {winnerSymbol && (
         <div className="my-4 flex items-center justify-center">
           {" "}
-          Победитель{"   "}
+          Победитель{""}
           <GameSymbol symbol={winnerSymbol} className="" />
         </div>
       )}
