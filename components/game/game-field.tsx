@@ -1,4 +1,4 @@
-import { GameSymbol } from "./game-symbol";
+import { GameSymbol } from "../game-new/game-symbol";
 import { Symbols } from "../helpers/constants";
 import {
   GameFieldCell,

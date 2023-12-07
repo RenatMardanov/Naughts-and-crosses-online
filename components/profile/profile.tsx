@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import clsx from "clsx";
-import avatarSrc from "../game/images/avatar-men-1.png";
+import avatarSrc from "../game-new/ui/images/avatar-men-1.png";
 
 interface ProfileProps {
   className: string;

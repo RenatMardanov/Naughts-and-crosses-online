@@ -1,4 +1,4 @@
-import { IconsClassName } from "../../helpers/interfaces";
+import { IconsClassName } from "../../../helpers/interfaces";
 
 export function CloseModalCross({ className }: IconsClassName) {
   return (

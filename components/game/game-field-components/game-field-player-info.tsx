@@ -1,5 +1,5 @@
 import { UiButton } from "../../uikit/ui-button";
-import { GameSymbol } from "../game-symbol";
+import { GameSymbol } from "../../game-new/game-symbol";
 import { Symbols } from "../../helpers/constants";
 
 interface GameFieldPlayerInfoProps {
