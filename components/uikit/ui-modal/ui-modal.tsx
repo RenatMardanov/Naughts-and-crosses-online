@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { CloseModalCross } from "../../game/icons/close-modal-cross";
+import { CloseModalCross } from "../../game-new/ui/icons/close-modal-cross";
 import { MouseEvent, MouseEventHandler, ReactNode } from "react";
 import { createPortal } from "react-dom";
 
