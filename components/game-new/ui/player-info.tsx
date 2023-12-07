@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from "next/image";
-import { GameSymbol } from "../game-symbol";
 import clsx from "clsx";
 import { Symbols } from "../../helpers/constants";
+import { GameSymbol } from "../game-symbol";
 
 interface PlayerInfoProps {
   seconds: number;
@@ -39,10 +39,12 @@ export function PlayerInfo({
   return (
     <div className="flex items-center gap-3">
       <div className={clsx("relative", isRight && "order-3")}>
-        <div className={"flex items-center gap-2 text-start text-teal-600"}>
+        <div
+          className={"flex items-center gap-2 text-start text-teal-600 w-44"}
+        >
           <Image src={avatar} alt="avatar" width={48} height={48} />
           <div className="overflow-hidden">
-            <div className=" text-lg leading-tight truncate w-44">{name}</div>
+            <div className=" text-lg leading-tight truncate">{name}</div>
             <div className="text-slate-400 text-xs leading-tight">
               Рейтинг: {rating}
             </div>

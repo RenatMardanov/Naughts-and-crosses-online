@@ -1,14 +1,19 @@
+import { ReactNode } from "react";
 import { useGameState } from "../../../hooks";
 import { UiButton } from "../../uikit/ui-button";
 import { UiModal } from "../../uikit/ui-modal/ui-modal";
 
-export function GameModalFrame() {
-  const { winnerSymbol } = useGameState({ playersCount: 2 });
+interface GameModalFrameProps {
+  winnerName: string | undefined;
+  players: ReactNode;
+}
+
+export function GameModalFrame({ winnerName, players }: GameModalFrameProps) {
   return (
     <UiModal
       width="md"
       className=""
-      isOpen={!!winnerSymbol}
+      isOpen={!!winnerName}
       onClose={() => {
         console.log("close");
       }}
@@ -16,9 +21,11 @@ export function GameModalFrame() {
       <UiModal.Header className="">Игра завершена</UiModal.Header>
       <UiModal.Body className="">
         <div className="text-sm">
-          Победитель: <span className="text-teal-600">Renatka</span>
+          Победитель: <span className="text-teal-600">{winnerName}</span>
         </div>
-        <div className="text-3xl">Обновляй, нихера не готово</div>
+        <div className={"mt-2 grid grid-cols-2 justify-between gap-3"}>
+          {players}
+        </div>
       </UiModal.Body>
       <UiModal.Footer className="">
         <UiButton className="" variant="outline" size="md">
