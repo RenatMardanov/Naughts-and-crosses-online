@@ -1,23 +1,37 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { Symbols } from "../components/helpers/constants";
 import { computeWinner, getNextStep } from "../components/game/model";
+import {
+  GameStateAction,
+  gameStateReducer,
+  initGameState,
+} from "./use-game-state-reduser";
 
-interface useGameStateProps {
+interface UseGameStateProps {
   playersCount: number;
 }
 
-interface gameStateProps {
+interface GameState {
   cells: (Symbols | null)[];
   currentStep: Symbols;
   playersTimerOver: Symbols[];
 }
 
-export function useGameState({ playersCount }: useGameStateProps) {
-  const [gameState, setGameState] = useState<gameStateProps>(() => ({
-    cells: new Array(19 * 19).fill(null),
-    currentStep: Symbols.CROSS,
-    playersTimerOver: [],
-  }));
+interface UseGameStateResult {
+  gameState: GameState;
+  nextStep: Symbols;
+  winnerSequence: number[] | undefined;
+  winnerSymbol: Symbols | null;
+  dispatch: React.Dispatch<GameStateAction>;
+}
+export function useGameState({
+  playersCount,
+}: UseGameStateProps): UseGameStateResult {
+  const [gameState, dispatch] = useReducer(
+    gameStateReducer,
+    { playersCount },
+    initGameState,
+  );
 
   const nextStep = getNextStep(
     gameState.currentStep,
@@ -33,42 +47,25 @@ export function useGameState({ playersCount }: useGameStateProps) {
         ? gameState.cells[winnerSequence[0]]
         : null;
 
-  const handleCellClick = (index: number) => {
-    if (gameState.cells[index] === null) {
-      setGameState((lastGameState) => ({
-        ...lastGameState,
-        currentStep: getNextStep(
-          lastGameState.currentStep,
-          playersCount,
-          lastGameState.playersTimerOver,
-        ),
-        cells: lastGameState.cells.map((cell, i) =>
-          i === index ? lastGameState.currentStep : cell,
-        ),
-      }));
-    }
-  };
-
-  const handlePlayerTimeOver = (symbol: Symbols) => {
-    setGameState((lastGameState) => {
-      return {
-        ...lastGameState,
-        playersTimerOver: [...lastGameState.playersTimerOver, symbol],
-        currentStep: getNextStep(
-          lastGameState.currentStep,
-          playersCount,
-          lastGameState.playersTimerOver,
-        ),
-      };
-    });
-  };
+  // const handlePlayerTimeOver = (symbol: Symbols) => {
+  //   setGameState((lastGameState) => {
+  //     return {
+  //       ...lastGameState,
+  //       playersTimerOver: [...lastGameState.playersTimerOver, symbol],
+  //       currentStep: getNextStep(
+  //         lastGameState.currentStep,
+  //         playersCount,
+  //         lastGameState.playersTimerOver,
+  //       ),
+  //     };
+  //   });
+  // };
 
   return {
     gameState,
-    handleCellClick,
     nextStep,
     winnerSequence,
-    handlePlayerTimeOver,
     winnerSymbol,
+    dispatch,
   };
 }

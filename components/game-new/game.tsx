@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useGameState } from "../../hooks";
 import { PLAYERS } from "../helpers/constants";
 import { BackLink } from "./ui/backLink";
@@ -9,18 +8,13 @@ import { GameMoveInfo } from "./ui/game-move-info";
 import { GameTitle } from "./ui/game-title";
 import { PlayerInfo } from "./ui/player-info";
 import { GameModalFrame } from "./ui/game-modal-frame";
+import { GAME_STATE_ACTIONS } from "../../hooks/use-game-state-reduser";
 
 export function Game() {
   const playersCount: number = 2;
 
-  const {
-    gameState,
-    handleCellClick,
-    nextStep,
-    winnerSequence,
-    handlePlayerTimeOver,
-    winnerSymbol,
-  } = useGameState({ playersCount });
+  const { gameState, dispatch, nextStep, winnerSequence, winnerSymbol } =
+    useGameState({ playersCount });
 
   const winnerPlayer = PLAYERS.find((player) => player.symbol === winnerSymbol);
   return (
@@ -59,7 +53,12 @@ export function Game() {
               key={index}
               disabled={!!winnerSymbol}
               isWinner={winnerSequence?.includes(index)}
-              onClick={() => handleCellClick(index)}
+              onClick={() =>
+                dispatch({
+                  type: GAME_STATE_ACTIONS.CELL_CLICK,
+                  index,
+                })
+              }
               symbol={cell}
             />
           );
