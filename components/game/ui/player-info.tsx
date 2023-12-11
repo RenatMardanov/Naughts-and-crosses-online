@@ -2,26 +2,34 @@ import Image, { StaticImageData } from "next/image";
 import clsx from "clsx";
 import { Symbols } from "../../helpers/constants";
 import { GameSymbol } from "../game-symbol";
+import { useNow } from "../lib/timers";
 
 interface PlayerInfoProps {
-  seconds: number;
+  timer: number;
+  timerStartAt: number | undefined;
   isRight: boolean;
   avatar: StaticImageData;
   rating: number;
   name: string;
   symbol: Symbols;
-  isTimerRunning: boolean;
 }
 
 export function PlayerInfo({
   isRight,
   avatar,
   rating,
-  isTimerRunning,
   name,
-  seconds,
+  timer,
+  timerStartAt,
   symbol,
 }: PlayerInfoProps) {
+  const now = useNow(1000, !!timerStartAt);
+
+  const milliseconds = Math.max(
+    now ? timer - (now - (timerStartAt ? timerStartAt : 0)) : timer,
+    0,
+  );
+  const seconds = Math.ceil(milliseconds / 1000);
   const secondString = Math.floor(seconds / 60)
     .toString()
     .padStart(2, "0");
@@ -31,7 +39,7 @@ export function PlayerInfo({
 
   const isDanger = seconds <= 10;
   const getTimerColor = () => {
-    if (isTimerRunning) {
+    if (timerStartAt) {
       return isDanger ? "text-orange-600" : "text-slate-900";
     }
     return "text-slate-200";
