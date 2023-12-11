@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode } from "react";
 import { Header } from "../components/header";
-import { Game } from "../components/game-new";
+import { Game } from "../components/game";
 
 export default function HomePages() {
   return (

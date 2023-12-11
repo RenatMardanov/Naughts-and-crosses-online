@@ -1,4 +1,4 @@
-import { getNextStep } from "../components/game-new/model/get-next-step";
+import { getNextStep } from "../components/game/model/get-next-step";
 import { Symbols } from "../components/helpers/constants";
 
 type ReduserState = {

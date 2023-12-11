@@ -1,7 +1,7 @@
-import PlayerAvatar1 from "./../game-new/ui/images/avatar-girl-1.png";
-import PlayerAvatar2 from "./../game-new/ui/images/avatar-girl-2.png";
-import PlayerAvatar3 from "./../game-new/ui/images/avatar-men-1.png";
-import PlayerAvatar4 from "./../game-new/ui/images/avatar-men-2.png";
+import PlayerAvatar2 from "./../game/ui/images/avatar-girl-2.png";
+import PlayerAvatar1 from "./../game/ui/images/avatar-girl-1.png";
+import PlayerAvatar3 from "./../game/ui/images/avatar-men-1.png";
+import PlayerAvatar4 from "./../game/ui/images/avatar-men-2.png";
 
 export enum Symbols {
   CROSS = "cross",
