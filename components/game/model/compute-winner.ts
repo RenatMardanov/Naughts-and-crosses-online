@@ -6,7 +6,6 @@ export function computeWinner(
   fieldSize = 19,
 ) {
   const gap: number = Math.floor(sequenceSize / 2);
-
   function compareElements(indexes: number[]) {
     let res = true;
 
