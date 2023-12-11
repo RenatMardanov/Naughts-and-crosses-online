@@ -1,18 +1,7 @@
-import { STEP_ORDER, Symbols } from "../helpers/constants";
+import { GameState } from "./../../helpers/interfaces";
 
-export function getNextStep(
-  currentStep: Symbols,
-  playersCount: number,
-  playersTimerOver: Symbols[],
-) {
-  const slicedStepOrder = STEP_ORDER.slice(0, playersCount).filter(
-    (symbol) => !playersTimerOver?.includes(symbol),
-  );
-  const nextMoveIndex = slicedStepOrder.indexOf(currentStep) + 1;
-  return slicedStepOrder[nextMoveIndex] ?? slicedStepOrder[0];
-}
 export function computeWinner(
-  cells: (Symbols | null)[],
+  gameState: GameState,
   sequenceSize = 5,
   fieldSize = 19,
 ) {
@@ -22,17 +11,17 @@ export function computeWinner(
     let res = true;
 
     for (let i = 1; i < indexes.length; i++) {
-      res &&= !!cells[indexes[i]];
-      res &&= cells[indexes[i]] === cells[indexes[i - 1]];
+      res &&= !!gameState.cells[indexes[i]];
+      res &&= gameState.cells[indexes[i]] === gameState.cells[indexes[i - 1]];
     }
     return res;
   }
 
   function getSequencesIndexes(i: number): Array<number>[] {
     const result: number[][] = [
-      [], // -
-      [], // \
-      [], // /
+      [],
+      [],
+      [],
       [], // |
     ];
 
@@ -53,8 +42,8 @@ export function computeWinner(
     return result;
   }
 
-  for (let i = 0; i < cells.length; i++) {
-    if (cells[i]) {
+  for (let i = 0; i < gameState.cells.length; i++) {
+    if (gameState.cells[i]) {
       const indexRows = getSequencesIndexes(i);
       const winnerIndexes = indexRows.find((row) => compareElements(row));
 

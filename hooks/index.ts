@@ -1,1 +1,1 @@
-export { useGameState } from "./useGameState";
+export { gameStateReducer } from "./use-game-state-reduser";

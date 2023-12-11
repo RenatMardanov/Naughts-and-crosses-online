@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { useGameState } from "../../../hooks";
 import { UiButton } from "../../uikit/ui-button";
 import { UiModal } from "../../uikit/ui-modal/ui-modal";
 
