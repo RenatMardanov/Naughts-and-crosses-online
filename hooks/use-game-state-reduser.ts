@@ -28,9 +28,7 @@ export function gameStateReducer(state: ReduserState, action: CellClickAction) {
       return {
         ...state,
         currentStep: getNextStep(
-          state.currentStep,
-          state.playersCount,
-          state.playersTimerOver,
+          state
         ),
 
         cells: state.cells.map((cell, i) =>
@@ -44,10 +42,15 @@ export function gameStateReducer(state: ReduserState, action: CellClickAction) {
   }
 }
 
-export const initGameState = ({ playersCount }: ReduserState) => {
+export const initGameState = ({
+  playersCount,
+}: {
+  playersCount: number;
+}): ReduserState => {
   return {
     cells: new Array(19 * 19).fill(null),
     currentStep: Symbols.CROSS,
     playersCount,
+    playersTimerOver: [],
   };
 };

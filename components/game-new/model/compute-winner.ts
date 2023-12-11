@@ -1,7 +1,8 @@
+import { GameState } from "./../../helpers/interfaces";
 import { Symbols } from "../../helpers/constants";
 
 export function computeWinner(
-  cells: (Symbols | null)[],
+  gameState: GameState,
   sequenceSize = 5,
   fieldSize = 19,
 ) {
@@ -11,8 +12,8 @@ export function computeWinner(
     let res = true;
 
     for (let i = 1; i < indexes.length; i++) {
-      res &&= !!cells[indexes[i]];
-      res &&= cells[indexes[i]] === cells[indexes[i - 1]];
+      res &&= !!gameState.cells[indexes[i]];
+      res &&= gameState.cells[indexes[i]] === gameState.cells[indexes[i - 1]];
     }
     return res;
   }
@@ -42,8 +43,8 @@ export function computeWinner(
     return result;
   }
 
-  for (let i = 0; i < cells.length; i++) {
-    if (cells[i]) {
+  for (let i = 0; i < gameState.cells.length; i++) {
+    if (gameState.cells[i]) {
       const indexRows = getSequencesIndexes(i);
       const winnerIndexes = indexRows.find((row) => compareElements(row));
 
