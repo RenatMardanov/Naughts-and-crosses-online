@@ -11,6 +11,9 @@ export interface UseGameStateProps {
 export interface GameState {
   cells: (Symbols | null)[];
   currentStep: Symbols;
-  playersTimerOver: Symbols[];
   playersCount: number;
+  currentStepStart: number;
+  timers: {
+    [key in Symbols]: number;
+  };
 }

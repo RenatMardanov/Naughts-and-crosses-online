@@ -20,28 +20,28 @@ export const STEP_ORDER = [
 export const PLAYERS = [
   {
     id: 1,
-    name: "Renat",
+    name: "Player 1",
     rating: 1111,
     avatar: PlayerAvatar1,
     symbol: Symbols.CROSS,
   },
   {
     id: 2,
-    name: "Sofiaaaaaaaaaaa",
+    name: "Player 2",
     rating: 850,
     avatar: PlayerAvatar2,
     symbol: Symbols.ZERO,
   },
   {
     id: 3,
-    name: "Maxim",
+    name: "Player 3",
     rating: 1400,
     avatar: PlayerAvatar3,
     symbol: Symbols.TRIANGLE,
   },
   {
     id: 4,
-    name: "Roma",
+    name: "Player 4",
     rating: 1130,
     avatar: PlayerAvatar4,
     symbol: Symbols.SQUARE,
